@@ -13,9 +13,9 @@ services:
       - $HOME/.composer/:$HOME/.composer/
     environment:
       - "DB_HOST=mysql"
-      - "DB_DATABASE=upload"
-      - "DB_USERNAME=upload"
-      - "DB_PASSWORD=upload"
+      - "DB_DATABASE=uploads"
+      - "DB_USERNAME=uploads"
+      - "DB_PASSWORD=uploads"
       - "REDIS_HOST=redis"
       - "REDIS_PORT=6379"
     networks:
@@ -39,10 +39,10 @@ services:
     volumes:
       - mysqldata:/var/lib/mysql
     environment:
-      - "MYSQL_ROOT_PASSWORD=upload"
-      - "MYSQL_DATABASE=upload"
-      - "MYSQL_USER=upload"
-      - "MYSQL_PASSWORD=upload"
+      - "MYSQL_ROOT_PASSWORD=uploads"
+      - "MYSQL_DATABASE=uploads"
+      - "MYSQL_USER=uploads"
+      - "MYSQL_PASSWORD=uploads"
     ports:
         - "3306:3306"
     networks:
