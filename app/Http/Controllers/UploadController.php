@@ -29,7 +29,22 @@ class UploadController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+//        dd($request->all());
+        /*
+        * Move Logo
+        */
+        $logo = $request -> file('logo');
+        $ext = $logo->getClientOriginalExtension();
+        $name = "uploads-".uniqid() . ".$ext";
+        $logo -> move( public_path('storage/') , $name);
+
+        Upload::create([
+
+            'logo' => $name,
+
+        ]);
+        session()->flash('Add', __('File Upload Added Successfully') );
+        return redirect()->back();
     }
 
     /**
@@ -43,24 +58,50 @@ class UploadController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Upload $upload)
+    public function edit($id)
     {
-        //
+        $upload = Upload::findorfail($id);
+        return view ('uploads.edit',compact('upload'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Upload $upload)
+    public function update(Request $request, $id)
     {
-        //
+        $upload = Upload::findorFail($request->id);
+
+        $name = $upload -> logo;
+
+        if($request->hasFile('logo'))
+        {
+
+            $logo = $request -> file('logo');
+            $ext = $logo->getClientOriginalExtension();
+            $name = "uploads-".uniqid() . ".$ext";
+            $logo -> move( public_path('storage') , $name);
+        }
+        $upload->update([
+
+            'logo' => $name ,
+        ]);
+        session()->flash('Edit','Updated Successfully');
+        return redirect()->back();
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Upload $upload)
+    public function destroy(Request $request)
     {
-        //
+//        dd($request);
+        try {
+            Upload::destroy($request->upload_id);
+            session()->flash('Deleted', 'Data has been deleted successfully');
+            return redirect()->back();
+        }
+        catch (\Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
     }
 }

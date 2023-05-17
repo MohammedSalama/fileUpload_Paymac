@@ -3,7 +3,7 @@
 @endsection
 
 @section('title')
-    Companies
+    Logo
 @endsection
 @section('page-header')
     <!-- breadcrumb -->
@@ -48,7 +48,7 @@
                                     <td>{{ $loop -> iteration }}</td>
 
                                     <td>
-                                        <img style="width: 50%; height: 50%;"
+                                        <img style="width: 30%; height:30%;"
                                              src="
                                                 {{--  مسار الصور --}}
                                              {{ asset('storage/'. $upload -> logo) }}"
