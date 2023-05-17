@@ -25,24 +25,44 @@ class UploadController extends Controller
 
     public function create(Request $request)
     {
-        $upload = new Upload();
-        $upload->logo	= $request->get('logo');
-        $upload->save();
+        /*
+        * Move Logo
+        */
+        $logo = $request -> file('logo');
+        $ext = $logo->getClientOriginalExtension();
+        $name = "uploads-".uniqid() . ".$ext";
+        $logo -> move( public_path('storage/') , $name);
+
+        $upload = Upload::create([
+
+            'logo' => $name,
+
+        ]);
+
         return $upload;
     }
 
     public function update(Request $request, $id)
     {
-        $upload = Upload::find($id);
+        $upload = Upload::findorFail($request->id);
 
-        if (!$upload)
+        $name = $upload -> logo;
+
+        if($request->hasFile('logo'))
         {
-            return response()->json(['status' => 'Not Found'] , Response::HTTP_NOT_FOUND);
-        }
 
-        $upload->logo	= $request->get('logo');
-        $upload->save();
+            $logo = $request -> file('logo');
+            $ext = $logo->getClientOriginalExtension();
+            $name = "uploads-".uniqid() . ".$ext";
+            $logo -> move( public_path('storage') , $name);
+        }
+        $upload->update([
+
+            'logo' => $name ,
+        ]);
+
         return $upload;
+
     }
 
     public function delete(Request $request, $id)
