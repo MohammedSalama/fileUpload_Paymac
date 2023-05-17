@@ -23,25 +23,24 @@ Route::get('/', function () {
 });
 
 /**
- * ADMIN DASHBOARD
+ * Function Group Middleware
  */
-Route::get('/admin_dashboard', function () {
-    return view('admin.admin_dashboard');
-})->middleware(['auth', 'verified'])->name('admin_dashboard');
-
-/**
- * CRUD FILE UPLOAD
- */
-Route::get('admin_dashboard/uploads',[UploadController::class,'index'])->name('uploads');
-Route::post('admin_dashboard/uploads/store',[UploadController::class,'store'])->name('uploads.store');
-Route::post('admin_dashboard/uploads/destroy',[UploadController::class,'destroy'])->name('uploads.destroy');
-Route::post('admin_dashboard/uploads/{id}',[UploadController::class,'update'])->name('uploads.update');
-
-
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    /**
+     * ADMIN DASHBOARD
+     */
+    Route::get('/admin_dashboard', function () {
+        return view('admin.admin_dashboard');
+    })->name('admin_dashboard');
+
+    /**
+     * CRUD FILE UPLOAD
+     */
+    Route::get('admin_dashboard/uploads',[UploadController::class,'index'])->name('uploads');
+    Route::post('admin_dashboard/uploads/store',[UploadController::class,'store'])->name('uploads.store');
+    Route::post('admin_dashboard/uploads/destroy',[UploadController::class,'destroy'])->name('uploads.destroy');
+    Route::post('admin_dashboard/uploads/{id}',[UploadController::class,'update'])->name('uploads.update');
+
 });
 
 require __DIR__.'/auth.php';
