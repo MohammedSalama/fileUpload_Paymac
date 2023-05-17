@@ -8,4 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Upload extends Model
 {
     use HasFactory;
+
+    /**
+     * @var array
+     */
+    protected $guarded = [];
+
+    /**
+     * @param $value
+     * @return string
+     */
+    public function getNameAttribute($value)
+    {
+        return ucfirst($value);
+    }
 }
