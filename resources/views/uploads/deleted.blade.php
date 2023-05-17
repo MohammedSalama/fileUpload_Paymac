@@ -8,7 +8,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            {{--            @include('message')--}}
+            @include('message')
             <form action="{{route('uploads.destroy','test')}}" method="POST">
                 @csrf
                 @method('POST')
