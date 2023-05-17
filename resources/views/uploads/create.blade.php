@@ -10,7 +10,7 @@
                 </button>
             </div>
             <div class="modal-body">
-{{--                @include('message')--}}
+                @include('message')
                 <form action="{{route('uploads.store')}}" method="post" autocomplete="off" enctype="multipart/form-data">
                     @method('POST')
                     @csrf

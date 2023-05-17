@@ -22,7 +22,7 @@
     <!-- breadcrumb -->
 @endsection
 @section('content')
-{{--    @include('message')--}}
+    @include('message')
     <!-- row -->
     <div class="row">
         <div class="col-xl-12 mb-30">
