@@ -1,0 +1,108 @@
+{
+	"info": {
+		"_postman_id": "8f8c234c-0eb6-474a-bbf9-9dd37fa8675b",
+		"name": "paymac_project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16411477"
+	},
+	"item": [
+		{
+			"name": "all-uploads",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/uploads",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"uploads"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create upload",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "logo",
+							"type": "file",
+							"src": "/C:/Users/Developer/Desktop/Screenshot 2023-05-16 020200.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/uploads",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"uploads"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "show uploads",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/uploads/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"uploads",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update file",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "logo",
+							"type": "file",
+							"src": "/C:/Users/Developer/Desktop/Screenshot 2023-05-16 020200.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/uploads/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"uploads",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete file",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
