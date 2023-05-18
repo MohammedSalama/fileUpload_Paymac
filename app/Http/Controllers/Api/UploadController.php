@@ -9,6 +9,9 @@ use Illuminate\Http\Response;
 
 class UploadController extends Controller
 {
+
+    use ApiResponseTrait;
+
     /**
      * @return \Illuminate\Http\JsonResponse
      */
