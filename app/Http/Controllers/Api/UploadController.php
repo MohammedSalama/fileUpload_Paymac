@@ -18,11 +18,19 @@ class UploadController extends Controller
         return response()->json($upload);
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function show($id)
     {
         return Upload::find($id) ?? response()->json(['status' => 'Not Found'] , Response::HTTP_NOT_FOUND);
     }
 
+    /**
+     * @param Request $request
+     * @return mixed
+     */
     public function create(Request $request)
     {
         /*
@@ -42,6 +50,11 @@ class UploadController extends Controller
         return $upload;
     }
 
+    /**
+     * @param Request $request
+     * @param $id
+     * @return mixed
+     */
     public function update(Request $request, $id)
     {
         $upload = Upload::findorFail($request->id);
@@ -65,6 +78,11 @@ class UploadController extends Controller
 
     }
 
+    /**
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function delete(Request $request, $id)
     {
         $upload = Upload::find($id);
