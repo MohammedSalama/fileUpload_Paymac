@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\UploadController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -15,17 +16,32 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+/**
+ * AUTHENTICATION
+ */
+//Route::post('register', [AuthController::class, 'register']);
+Route::post('login', [AuthController::class, 'login']);
 
 /**
- * Route Uploads Api
+ * PROTECTED ROUTES
  */
-Route::get('uploads/{id}',[UploadController::class,'show']);
-Route::patch('uploads/{id}',[UploadController::class,'update']);
-Route::delete('uploads/{id}',[UploadController::class,'delete']);
-Route::post('uploads',[UploadController::class,'create']);
-Route::get('/uploads',[UploadController::class,'index']);
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    /**
+     * Route Uploads Api
+     */
+    Route::get('uploads/{id}',[UploadController::class,'show']);
+    Route::patch('uploads/{id}',[UploadController::class,'update']);
+    Route::delete('uploads/{id}',[UploadController::class,'delete']);
+    Route::post('uploads',[UploadController::class,'create']);
+    Route::get('/uploads',[UploadController::class,'index']);
+
+    /**
+     * Logout Function
+     */
+    Route::post('logout', [AuthController::class, 'logout']);
+});
+
+
+
 
 
