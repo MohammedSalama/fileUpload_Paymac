@@ -17,7 +17,7 @@ class UploadResource extends JsonResource
 //        return parent::toArray($request);
         return [
             'id' => $this->id,
-            'logo' => $this->logo,
+            'logo' => $this->logo
         ];
     }
 }
